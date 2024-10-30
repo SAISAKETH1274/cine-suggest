@@ -3,7 +3,7 @@ import pandas as pd
 from model.preprocess import load_and_clean_data, preprocess_data
 from model.recommender import create_similarity_matrix
 from model.model_utils import save_model, load_model
-
+from waitress import serve
 app = Flask(__name__)
 
 df = load_and_clean_data('datasets/TMDB.csv', rows=5000)
@@ -81,4 +81,4 @@ def get_movie_titles():
     return jsonify(titles)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    serve(app,host='127.0.0.0',debug=True)
